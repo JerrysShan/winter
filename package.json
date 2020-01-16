@@ -1,0 +1,36 @@
+{
+    "name": "winter",
+    "version": "0.0.1",
+    "description": "an IOC koa web freamework",
+    "main": "index.js",
+    "scripts": {
+        "dev": "nodemon --exec ts-node app.ts",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "ioc",
+        "koa",
+        "web"
+    ],
+    "author": "",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/koa": "^2.11.0",
+        "@types/koa-router": "^7.4.0",
+        "@types/node": "^13.1.6",
+        "@typescript-eslint/eslint-plugin": "^2.15.0",
+        "@typescript-eslint/parser": "^2.15.0",
+        "eslint": "^6.8.0",
+        "husky": "^4.0.6",
+        "jest": "^24.9.0",
+        "nodemon": "^2.0.2",
+        "ts-node": "^8.6.0",
+        "typescript": "^3.7.4"
+    },
+    "dependencies": {
+        "koa": "^2.11.0",
+        "koa-router": "^7.4.0",
+        "reflect-metadata": "^0.1.13",
+        "typedi": "^0.8.0"
+    }
+}
