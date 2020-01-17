@@ -1,4 +1,4 @@
-import { Service } from '../descorators';
+import { Service } from '../../';
 
 @Service()
 class HomeService {
