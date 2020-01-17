@@ -3,8 +3,11 @@ import 'reflect-metadata';
 import Container from './container';
 import { METADATA_PREFIX } from './constants';
 
+import { loadControllers } from './loaders';
+
 
 export function initRouter(): Router {
+    loadControllers();
     const router = new Router();
     Container.routers.forEach(r => {
         const instance = Container.get(r.serviceIdentifier);

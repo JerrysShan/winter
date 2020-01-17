@@ -29,6 +29,7 @@
         "typescript": "^3.7.5"
     },
     "dependencies": {
+        "globby": "^11.0.0",
         "koa-router": "^7.4.0",
         "reflect-metadata": "^0.1.13"
     }
