@@ -1,6 +1,6 @@
 import { ServiceIdentifier } from './service_identifier';
 
-export interface ServiceMetaData {
+export interface ServiceMetadata {
     type: Function;
     value?: any;
     transient?: boolean;

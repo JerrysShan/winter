@@ -1,2 +1,2 @@
 
-export type ServiceIdentifier<T = any> = Function | string | { service: T };
+export type ServiceIdentifier = Function | string;
