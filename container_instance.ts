@@ -38,6 +38,10 @@ export class ContainerInstance {
         }
 
         const type = servcie.type;
+        if (!type) {
+            throw new Error(`Cannot determine a class of the requesting service "${identifier}"`);
+        }
+
         const paramTypes = Reflect.getMetadata('design:paramtypes', type);
         const params: any[] = paramTypes ? this.initiallizeParams(paramTypes) : [];
         const value = new (type.bind.apply(type, [null, ...params]))();

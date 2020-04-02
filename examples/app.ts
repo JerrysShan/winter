@@ -1,11 +1,7 @@
-import * as Koa from 'koa';
-import { initRouter } from '../';
+import { Application } from '../';
+import handleError from './middleware/error';
 
-const app = new Koa();
-
-const router = initRouter();
-
-app.use(router.routes());
+const app = new Application({ middlewares: [handleError] });
 
 app.listen(3000, () => {
     console.log('server is listening 3000');

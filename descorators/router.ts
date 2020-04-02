@@ -8,7 +8,7 @@ export function Request(path: string, method: METHOD) {
         const handler = descriptor.value;
         descriptor.value = async function (ctx: Context) {
             const params = Object.create(null);
-            const result = await handler.apply(this, Object.assign(params, ctx.params, ctx.query));
+            const result = await handler.call(this, Object.assign(params, ctx.params, ctx.query));
             ctx.body = result;
         }
         Container.registRouter({ path, method, serviceIdentifier: target.constructor.name, methodName: key });
