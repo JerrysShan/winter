@@ -1,5 +1,5 @@
 import Result from '../entities/response_result'
-import { Controller, GET, POST, Inject, BaseController } from '../..';
+import { Controller, GET, POST, Inject, BaseController, Query } from '../..';
 import HomeService from '../services/home';
 // import winston = require('winston');
 
@@ -9,9 +9,9 @@ export default class HomeController extends BaseController {
     homeService: HomeService;
 
     @GET('/index')
-    public async index(): Promise<Result> {
+    public async index(@Query() query): Promise<Result> {
         const data = await this.homeService.index();
-        this.logger.info('request index', Date.now())
+        this.logger.info('request index', query, Date.now())
         return { code: 0, data: data, msg: 'OK' };
     }
 

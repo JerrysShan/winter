@@ -1,16 +1,43 @@
-import { METHOD } from '../constants';
 import { Context } from 'koa';
+import { METHOD } from '../types/request_method';
 import Container from '../container';
+import { ParameterDesc, ParameterType } from '../types/parameter';
+import { METADATA_PARAM } from '../constants';
+
+function getParams(ctx: Context, descs: ParameterDesc[]): any {
+    let arr: any = [];
+    descs.forEach(desc => {
+        switch (desc.type) {
+            case ParameterType.body:
+                arr[desc.index] = ctx.request.body;
+                break;
+            case ParameterType.header:
+                arr[desc.index] = ctx.header;
+                break;
+            case ParameterType.query:
+                arr[desc.index] = ctx.query;
+                break;
+            case ParameterType.params:
+                arr[desc.index] = ctx.params;
+                break;
+            default:
+                throw new Error('unknown params');
+        }
+    });
+    return arr;
+}
 
 
 export function Request(path: string, method: METHOD) {
     return function (target: any, key: string, descriptor: PropertyDescriptor) {
         const handler = descriptor.value;
+        const descs = Reflect.getMetadata(METADATA_PARAM, target, key);
         descriptor.value = async function (ctx: Context) {
-            const params = Object.create(null);
-            const result = await handler.call(this, Object.assign(params, ctx.params, ctx.query));
+            const params = getParams(ctx, descs);
+            const result = await handler.call(this, Object.assign(params, ...params));
             ctx.body = result;
         }
+
         Container.registRouter({ path, method, serviceIdentifier: target.constructor.name, methodName: key });
     }
 }
